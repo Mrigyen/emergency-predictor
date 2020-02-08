@@ -67,3 +67,30 @@ def predict(encoded_features: list) -> float:
     saved_model = joblib.load(filename)
     return float(saved_model.predict(encoded_features))
 predict(np.asarray(df)[0][:-1].reshape(1,-1))
+df
+location = pd.read_csv("lat_long_only.csv")
+location
+np.random.uniform(0.5, 1)
+np.random.uniform(0.5, 1)
+np.random.uniform(0.5, 1)
+np.random.uniform(0.5, 1)
+np.random.uniform(0.5, 1)
+# Train model on existing mock dataset
+def train(clean_df):
+    features = pd.DataFrame(clean_df, columns=clean_df.columns[:-1])
+    labels = pd.DataFrame(clean_df, columns=[clean_df.columns[-1]])
+    feature_list = list(features.columns)
+    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.25, random_state = 42)
+
+    # Instantiate model with 1000 decision trees
+    rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)# Train the model on training data
+    rf.fit(train_features, train_labels);
+
+    # Save model, overwriting any previous model
+    joblib.dump(rf, filename)
+    
+df
+df["intensity"] = [x for x in np.random.uniform(0.8, 1)]
+df["intensity"] = [x for x in np.random.uniform(0.8, 1, size=929)]
+df
+train(df)

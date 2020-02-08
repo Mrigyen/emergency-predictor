@@ -4,6 +4,7 @@ from flask import Flask
 import model
 import encoding
 import proximity
+import numpy as np
 
 app = Flask(__name__)
 
@@ -14,7 +15,7 @@ def status() -> str:
     return status
 
 
-@app.route("/predict/<str:military_time>/<str:lat>/<str:longitude>/<int:age>/<int:gender>")
+@app.route("/predict/<military_time>/<lat>/<longitude>/<age>/<gender>")
 def predict(military_time, lat, longitude, age, gender) -> float:
     # get proximity score
     location_node = [float(lat), float(longitude)]
@@ -23,10 +24,10 @@ def predict(military_time, lat, longitude, age, gender) -> float:
     # get prediction of emergency
     sin_time = encoding.sin_time(encoding.military_time_in_minutes_fn(military_time))
     cos_time = encoding.cos_time(encoding.military_time_in_minutes_fn(military_time))
-    prediction = model.predict(age, gender, sin_time, cos_time)
+    prediction = model.predict(np.asarray([int(age), int(gender), sin_time, cos_time]).reshape(1, -1))
    
     # return multiplication
-    return proximity_score * prediction
+    return str(proximity_score * prediction)
 
 
 # run it directly via python3 main.py
