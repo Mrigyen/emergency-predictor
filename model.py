@@ -17,15 +17,24 @@ from sklearn.model_selection import train_test_split
 import encoding
 import numpy as np
 import joblib
+from pathlib import Path
 
+# hardcoded relative path for file
 filename = "model.save"
 
 
+# Return if model.save exists
+def check_for_saved_model() -> bool:
+    if Path(filename).is_file():
+        return True
+    else:
+        return False
+
+
 # Clean dataset
-def clean_dataset() -> pd.Dataframe:
+def clean_dataset() -> pd.DataFrame:
     df = pd.read_csv("latest_dataset.csv")
     clean_df = pd.DataFrame()
-    clean_df["id"] = df["id"]
     clean_df["gender"] = df["gender"]
 
     for count, element in enumerate(clean_df["gender"]):
@@ -46,6 +55,7 @@ def clean_dataset() -> pd.Dataframe:
     clean_df["danger_intensity"] = df["danger_intensity"]
     return clean_df
 
+
 # Train model on existing mock dataset
 def train(clean_df):
     features = pd.DataFrame(clean_df, columns=clean_df.columns[:-1])
@@ -57,7 +67,7 @@ def train(clean_df):
     rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)# Train the model on training data
     rf.fit(train_features, train_labels);
 
-    # Save model
+    # Save model, overwriting any previous model
     joblib.dump(rf, filename)
 
 
