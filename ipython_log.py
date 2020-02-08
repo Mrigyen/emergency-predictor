@@ -1,93 +1,69 @@
 # IPython log file
 
 get_ipython().magic('logstart')
-import encoding
 import pandas as pd
+import numpy as np
+pd.read_csv("dataset_v2_with_encoded_normalized_fake_time_and_lat_long.csv")
+df = pd.read_csv("dataset_v2_with_encoded_normalized_fake_time_and_lat_long.csv")
+del(df["lat"])
+del(df["long"])
+df
+df.to_csv("dataset_v3.csv", index=None)
+np.random.uniform(size=100)
+np.random.uniform(size=929)
+np.random.uniform(size=100)
+np.random.uniform(size=929)
+temp np.random.uniform(size=929)
+temp = np.random.uniform(size=929)
+df["intensity"] = [x for x in temp]
+df
+df.to_csv("dataset_v4_with_intensity.csv", index=None)
+def train(clean_df):
+    features = pd.DataFrame(clean_df, columns=clean_df.columns[:-1])
+    labels = pd.DataFrame(clean_df, columns=[clean_df.columns[-1]])
+    feature_list = list(features.columns)
+    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size = 0.25, random_state = 42)
+
+    # Instantiate model with 1000 decision trees
+    rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)# Train the model on training data
+    rf.fit(train_features, train_labels);
+
+    # Save model, overwriting any previous model
+    joblib.dump(rf, filename)
+filename = "model.save"
+train(df)
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-import encoding
-import numpy as np
 import joblib
-from pathlib import Path
-df = pd.read_csv("dbn_fem.txt", sep=" ")
-df
-df_test = pd.read_csv("dbn_fem.txt")
-df_test
-del(df_test)
-df
-df_test = pd.read_csv("dbn_fem.txt", header=None)
-df
-df = pd.read_csv("dbn_fem.txt", header=None)
-df
-df = pd.read_csv("dbn_fem.txt", sep=" ", header=None)
-df
-df is pd.DataFrame
-3 is int
-type(df)
-df = df.rename(columns={"0":"lat", "1":"long", "2":"age", "3":"gender})
-df = df.rename(columns={"0":"lat", "1":"long", "2":"age", "3":"gender"})
-df
-df.columns
-df = df.rename(columns={0:"lat", 1:"long", 2:"age", 3:"gender"})
-df
-df.to_csv('cleaned_main_dataset.csv')
-for count, element in enumerate(df["gender"]):
-    if element == "Male":
-        df["gender"][count] = 1
-    else:
-        df["gender"][count] = 0
-    
-df
-df = pd.read_csv("cleaned_main_dataset.csv")
-df
-for count, element in enumerate(df["gender"]):
-    if element == "male":
-        df["gender"][count] = 1
-    else:
-        df["gender"][count] = 0
-    
-df
-clean_df["sin_time"] = pd.Series(np.zeros(929))
-clean_df["cos_time"] = pd.Series(np.zeros(929))
-df["sin_time"] = pd.Series(np.zeros(929))
-df["cos_time"] = pd.Series(np.zeros(929))
-df
-import math
-np.sin(3 * 60)
-np.cos(3 * 60)
-np.random.normal(loc=3*60)
-np.random.normal(loc=3*60)
-np.random.normal(loc=3*60)
-fake_times = np.random.normal(loc=180, size=928)
-fake_times
-df["lat"] = [encoding.cos_time(element) for element in fake_times]
-len(fake_times)
-len(df["lat"])
-fake_times = np.random.normal(loc=180, size=929)
-df["lat"] = [encoding.cos_time(element) for element in fake_times]
-df
-new_df = pd.read_csv("cleaned_main_dataset.csv")
-df["lat"] = new_df["lat"]
-df
-df["sin_time"] = [encoding.cos_time(element) for element in fake_times]
-df
-df["sin_time"] = [encoding.sin_time(element) for element in fake_times]
-df
-df["cos_time"] = [encoding.cos_time(element) for element in fake_times]
-df
-fake_times
-fake_times = np.random.normal(loc=180, size=929, scale=30)
-fake_times
-fake_times = np.random.normal(loc=180, size=929, scale=50)
-fake_times = np.random.normal(loc=180, size=929, scale=100)
-fake_times
-fake_times = np.random.normal(loc=180, size=929, scale=50)
-fake_times
-df["sin_time"] = [encoding.sin_time(element) for element in fake_times]
-df["cos_time"] = [encoding.cos_time(element) for element in fake_times]
-df
-del(df[0])
-df
-df.columns
-del(df['Unnamed: 0'])
-df
+train(df)
+def predict(encoded_features):
+    model = joblib.load()
+    return model.predict(encoded_features)
+np.asarray(df)[0]
+predict(_)
+predict(np.asarray(df)[0])
+# Predict
+def predict(encoded_features):
+    model = joblib.load(filename)
+    return model.predict(encoded_features)
+predict(np.asarray(df)[0])
+predict(np.asarray(df)[0].reshape(1,-1))
+np.asarray(df)[0].reshape(1,-1)
+np.asarray(df)[0].reshape(1,-1)[:-1]
+np.asarray(df)[0][:-1].reshape(1,-1)
+predict(_)
+df[0]
+np.asarray(df)[0]
+float())
+float(_)
+np.asarray(df)[0]
+np.asarray(df)[0][0]
+np.asarray(df)[0][:-1].reshape(1,-1)
+predict(_)
+predict(np.asarray(df)[0][:-1].reshape(1,-1))
+float(_)
+# Predict
+def predict(encoded_features: list) -> float:
+    saved_model = joblib.load(filename)
+    return float(saved_model.predict(encoded_features))
+predict(np.asarray(df)[0][:-1].reshape(1,-1))

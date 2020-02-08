@@ -1,18 +1,4 @@
 import numpy as np
-from scipy.spatial import distance
-
-
-# Source: https://codereview.stackexchange.com/questions/28207/finding-the-closest-point-to-a-list-of-points
-def closest_node(node, nodes):
-    closest_index = distance.cdist([node], nodes).argmin()
-    return nodes[closest_index]
-
-
-def location_danger(node, nodes) -> float:
-    closest_n = closest_node(node, nodes)
-    dist = distance.cdist([node], [closest_n])
-    reciprocal = 1/dist[0][0]
-    return reciprocal
 
 
 minutes_in_day = 24*60

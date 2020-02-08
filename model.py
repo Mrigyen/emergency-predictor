@@ -31,31 +31,6 @@ def check_for_saved_model() -> bool:
         return False
 
 
-# Clean dataset
-def clean_dataset() -> pd.DataFrame:
-    df = pd.read_csv("latest_dataset.csv")
-    clean_df = pd.DataFrame()
-    clean_df["gender"] = df["gender"]
-
-    for count, element in enumerate(clean_df["gender"]):
-        if element == "Male":
-            clean_df["gender"][count] = 1
-        else:
-            clean_df["gender"][count] = 0
-
-    clean_df["sin_time"] = pd.Series(np.zeros(1000))
-    clean_df["cos_time"] = pd.Series(np.zeros(1000))
-
-    for count, element in enumerate(df["military_time"]):
-        clean_df["cos_time"][count] = encoding.cos_time(encoding.military_time_in_minutes_fn(element))
-    for count, element in enumerate(df["military_time"]):
-        clean_df["sin_time"][count] = encoding.sin_time(encoding.military_time_in_minutes_fn(element))
-
-    clean_df["age"] = df["age"]
-    clean_df["danger_intensity"] = df["danger_intensity"]
-    return clean_df
-
-
 # Train model on existing mock dataset
 def train(clean_df):
     features = pd.DataFrame(clean_df, columns=clean_df.columns[:-1])
@@ -72,6 +47,6 @@ def train(clean_df):
 
 
 # Predict
-def predict(encoded_features):
-    model = joblib.load()
-    return model.predict(encoded_features)
+def predict(encoded_features: list) -> float:
+    saved_model = joblib.load(filename)
+    return float(saved_model.predict(encoded_features))
