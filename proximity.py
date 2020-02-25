@@ -6,7 +6,7 @@ from scipy.spatial import distance
 import numpy as np
 import pandas as pd
 
-locations_csv = "lat_long_only.csv"
+locations_csv = "datasets/lat_long_only.csv"
 dataset_nodes = pd.read_csv(locations_csv)
 
 

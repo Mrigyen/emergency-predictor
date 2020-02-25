@@ -37,7 +37,7 @@ def get_predict():
         lat = request.args.get("lat")
         longitude = request.args.get("long")
         age = request.args.get("age")
-        gender = request.get("gender")
+        gender = request.args.get("gender")
         if gender == "male":
             gender = 1
         else:
