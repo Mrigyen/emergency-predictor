@@ -1,6 +1,0 @@
-# IPython log file
-
-get_ipython().magic('logstart')
-import numpy as np
-import pandas as pd
-data = pd.read_csv("drebin_questions_removed.md")
